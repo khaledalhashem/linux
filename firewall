@@ -16,27 +16,28 @@
 #HTTPS
  iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 #SQUID
-  iptables -A INPUT -p tcp --dport 3128 -j ACCEPT
-  iptables -A INPUT -p tcp --dport 3129 -j ACCEPT
+#  iptables -A INPUT -p tcp --dport 3128 -j ACCEPT
+#SQUID-HTTPS
+#  iptables -A INPUT -p tcp --dport 3129 -j ACCEPT
 #ZNC
-  iptables -A INPUT -p tcp --dport 1337 -j ACCEPT
+#  iptables -A INPUT -p tcp --dport 1337 -j ACCEPT
 #Ident
-  iptables -A INPUT -p tcp --dport 113 -j ACCEPT
+#  iptables -A INPUT -p tcp --dport 113 -j ACCEPT
 #FTP
 # iptables -A INPUT -p tcp --dport 20 -j ACCEPT
 # iptables -A INPUT -p tcp --dport 21 -j ACCEPT
 # This enables passive mode and restricts it to using the eleven ports for data connections. This is useful as you need to open these ports on your firewall.
 #  iptables -A INPUT -p tcp --dport 10090:10100 -j ACCEPT
 #VPN
- iptables -A INPUT -p udp --dport 1194 -j ACCEPT
- iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+# iptables -A INPUT -p udp --dport 1194 -j ACCEPT
+# iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
 #openvpn OpenVZ iptables. That is to route the traffic from tun0 to the interface that provides internet (venet0:0 by default).
 #csf configuration  copy and paste the below into -- /etc/csf/csfpre.sh -- csf -r
 # iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT -to-source 192.161.179.243
- iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
- iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
- iptables -A FORWARD -j REJECT
+# iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+# iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
+# iptables -A FORWARD -j REJECT
 # iptables -t nat -A POSTROUTING  -s 10.8.0.0/24 -o venet0 -j SNAT --to-source 172.93.54.35
 #
 # Set default policies for INPUT, FORWARD and OUTPUT chains
@@ -53,8 +54,8 @@
  iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT 
 #
 #Limit SSH connections to no more than 10 per minute. After 10 connecitons (or attempts), new incoming connections from that IP are dropped.
-iptables -A INPUT -p tcp --dport 28 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
-iptables -A INPUT -p udp --dport 1194 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name opevnpn -j DROP
+ iptables -A INPUT -p tcp --dport 28 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
+# iptables -A INPUT -p udp --dport 1194 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name opevnpn -j DROP
 
 #SPAM Banned IP Addresses
 

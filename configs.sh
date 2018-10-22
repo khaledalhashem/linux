@@ -86,6 +86,7 @@ tee firewall.sh <<EOF
 # This is essential when working on remote servers via SSH to prevent locking yourself out of the system
 #
 #SSH
+ iptables -A INPUT -p tcp --dport 22 -j ACCEPT
  iptables -A INPUT -p tcp --dport 28 -j ACCEPT
 #HTTP
  iptables -A INPUT -p tcp --dport 80 -j ACCEPT
@@ -130,6 +131,7 @@ tee firewall.sh <<EOF
  iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT 
 #
 #Limit SSH connections to no more than 10 per minute. After 10 connecitons (or attempts), new incoming connections from that IP are dropped.
+ iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
  iptables -A INPUT -p tcp --dport 28 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
 # iptables -A INPUT -p udp --dport 1194 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name opevnpn -j DROP
 

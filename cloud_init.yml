@@ -16,8 +16,8 @@ runcmd:
   - [ sed, -i, -e, 's/#Port 22/#Port 2222/g', etc/ssh/sshd_config ]
   - systemctl restart sshd
   - [ curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/configs.sh', -o, /root/configs.sh ]
-  - [ bash, -x, /root/configs.sh ]
-  - [ bash, -x, /root/firewall.sh ]
+  - [ bash, -x, configs.sh ]
+  - [ bash, -x, firewall.sh ]
 write_files:
   - path: /home/naurus/runme.sh
     content: |
@@ -30,7 +30,6 @@ resolv_conf:
   nameservers:
     - 1.1.1.1
 
-  - [curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/bashrc', -o, /root/.bashrc]
-  - [curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/tmux.conf', -o, /root/.tmux.conf]
-  - [curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/firewll.sh', -o, /root/firewall.sh]
-  - [ sh, -x, /root/firewall.sh ]
+#  - curl https://raw.githubusercontent.com/khaledalhashem/linux/master/bashrc -o /root/.bashrc
+#  - curl https://raw.githubusercontent.com/khaledalhashem/linux/master/tmux.conf -o /root/.tmux.conf
+#  - curl https://raw.githubusercontent.com/khaledalhashem/linux/master/firewll.sh -o /root/firewall.sh

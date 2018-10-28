@@ -19,17 +19,16 @@ runcmd:
   - [ bash, -x, /root/configs.sh ]
   - [ bash, -x, /root/firewall.sh ]
 write_files:
-  - path: /home/knaved/runme.sh
+  - path: /home/naurus/runme.sh
     content: |
       curl -o .bashrc https://raw.githubusercontent.com/khaledalhashem/linux/master/bashrc
       curl -o .tmux.conf https://raw.githubusercontent.com/khaledalhashem/linux/master/tmux.conf
-    owner: knaved:knaved
+    owner: naurus:naurus
     permissions: '0600'
 manage-resolv-conf: true
 resolv_conf:
   nameservers:
-    - 8.8.8.8
-    - 8.8.4.4
+    - 1.1.1.1
 
   - [curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/bashrc', -o, /root/.bashrc]
   - [curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/tmux.conf', -o, /root/.tmux.conf]

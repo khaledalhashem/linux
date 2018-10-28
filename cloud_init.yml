@@ -1,6 +1,6 @@
 #cloud-config
 users:
-  - name: knaved
+  - name: naurus
     groups: wheel
     shell: /bin/bash
     sudo: [ 'ALL=(ALL) NOPASSWD:ALL' ]
@@ -13,7 +13,7 @@ packages:
   - wget
 runcmd:
   - [ sed, -i, -e, 's/#PermitRootLogin yes/PermitRootLogin no/g', /etc/ssh/sshd_config ]
-  - [ sed, -i, -e, 's/#Port 22/#Port 28/g', etc/ssh/sshd_config ]
+  - [ sed, -i, -e, 's/#Port 22/#Port 2222/g', etc/ssh/sshd_config ]
   - systemctl restart sshd
   - [ curl, 'https://raw.githubusercontent.com/khaledalhashem/linux/master/configs.sh', -o, /root/configs.sh ]
   - [ bash, -x, /root/configs.sh ]

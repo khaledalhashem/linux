@@ -55,7 +55,6 @@
 #
 #Limit SSH connections to no more than 10 per minute. After 10 connecitons (or attempts), new incoming connections from that IP are dropped.
  iptables -A INPUT -p tcp --dport 22 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
- iptables -A INPUT -p tcp --dport 28 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name SSH -j DROP
 # iptables -A INPUT -p udp --dport 1194 -m state --state NEW -m recent --update --seconds 60 --hitcount 3 --rttl --name opevnpn -j DROP
 
 #SPAM Banned IP Addresses

@@ -10,6 +10,12 @@ fi
 
 # User specific aliases and functions
 
+# Start Tmux at login
+
+if [ -z "$TMUX" ]; then
+    tmux attach -t multi || tmux new -s multi
+fi
+
 # some more ls aliases
 #alias ll='ls -alF'
 alias la='ls -A'
